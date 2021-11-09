@@ -5,12 +5,13 @@ from loguru import logger
 
 # region logger
 logger.remove()
-logger.info("старт программы")
-# log_info = logger.add("log_info", level="INFO", rotation="10MB", compression="zip")
-# log_error = logger.add("log_error", level="ERROR", rotation="10MB", compression="zip")
+
+log_info = logger.add("../loggin/log_info", level="INFO", rotation="10MB", compression="zip")
+log_error = logger.add("../loggin/log_error", level="ERROR", rotation="10MB", compression="zip")
 # logger.remove(log_info)
 # logger.remove(log_error)
-# logger.remove()
+logger.remove()
+logger.info("старт программы")
 # endregion loggin
 plt.figure("График")
 plt.grid()
@@ -108,4 +109,6 @@ paint_plot(out_x, out_y, f"Новый график: окно={window}")
 # for i in range(51, 551, 50):
 #     out_x, out_y = f(in_x, in_y, i)
 #     paint_plot(out_x, out_y, f"Новый график: окно={i}")
+logger.info("Конец программы\n")
 plt.show()
+
