@@ -5,12 +5,6 @@ from loguru import logger
 
 # region logger
 logger.remove()
-
-log_info = logger.add("../loggin/log_info", level="INFO", rotation="10MB", compression="zip")
-log_error = logger.add("../loggin/log_error", level="ERROR", rotation="10MB", compression="zip")
-# logger.remove(log_info)
-# logger.remove(log_error)
-logger.remove()
 logger.info("старт программы")
 # endregion loggin
 plt.figure("График")
@@ -31,7 +25,7 @@ def dec(func):
 
 def file_in() -> (list, list):
     logger.info("Вызванна функция file_in")
-    with open("../text/in_file.txt", "r") as file:
+    with open("../text/in_file_wiki.txt", "r") as file:
         in_list = file.readlines()
     in_list = [i for i in in_list if "%" not in i]
     in_list = [i.removesuffix("\n") for i in in_list]
@@ -74,9 +68,11 @@ def paint_plot(x: list, y: list, name="Название не указано") ->
 
 
 def f(x: list, y: list, window: int) -> (list, list):
-    if window > len(x):  # ???????????
-        logger.error("Окно больше длины массива")
-        print("ОШИБКА: окно больше длины массива")
+    if window >= len(x) or window in (0, 1) or window % 2 == 0:
+        logger.error(
+            "ОШИБКА: Некоректная длина окна. Длина окна должна быть целым, положительным, нечётным числом не равным 0, 1 и не больше длины списка.")
+        print(
+            "ОШИБКА: Некоректная длина окна.\n Длина окна должна быть целым, положительным, нечётным числом не равным 0, 1 и не больше длины списка.\n")
         exit()
     logger.info("Вызванна функция f")
     out_x = []
@@ -111,4 +107,3 @@ paint_plot(out_x, out_y, f"Новый график: окно={window}")
 #     paint_plot(out_x, out_y, f"Новый график: окно={i}")
 logger.info("Конец программы\n")
 plt.show()
-
